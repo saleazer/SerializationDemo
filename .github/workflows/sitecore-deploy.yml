@@ -42,20 +42,6 @@ jobs:
       - name: Initialize Sitecore CLI Plugins
         run: dotnet sitecore plugin init
 
-      - name: Debug Sitecore credentials
-        env:
-          AUTH_HOST: ${{ secrets.XMC_AUTH_HOST }}
-          CM_HOST: ${{ secrets.XMC_CM_HOST }}
-          CLIENT_ID: ${{ secrets.XMC_CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.XMC_CLIENT_SECRET }}
-        run: |
-          echo "AUTH_HOST is set: ${{ secrets.XMC_AUTH_HOST != '' }}"
-          echo "CM_HOST is set: ${{ secrets.XMC_CM_HOST != '' }}"
-          echo "CLIENT_ID is set: ${{ secrets.XMC_CLIENT_ID != '' }}"
-          echo "CLIENT_SECRET is set: ${{ secrets.XMC_CLIENT_SECRET != '' }}"
-          echo "AUTH_HOST value: ${AUTH_HOST}"
-          echo "CM_HOST value: ${CM_HOST}"
-
       - name: Authenticate with Sitecore Cloud
         env:
           CLIENT_ID: ${{ secrets.XMC_CLIENT_ID }}
