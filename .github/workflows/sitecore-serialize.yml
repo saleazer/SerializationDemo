@@ -6,10 +6,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  checkChanges:
+  buildPackage:
     runs-on: ubuntu-latest
-    outputs:
-      serialization_changed: ${{ steps.check.outputs.changed }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -73,49 +71,46 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
 
-  # createPackage:
-  #   needs: checkChanges
-  #   if: needs.checkChanges.outputs.serialization_changed == 'true'
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 1
+      - name: Setup .NET
+        if: steps.check.outputs.changed == 'true'
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.x'
 
-  #     - name: Setup .NET
-  #       uses: actions/setup-dotnet@v4
-  #       with:
-  #         dotnet-version: '8.x'
+      - name: Install Sitecore CLI
+        if: steps.check.outputs.changed == 'true'
+        run: dotnet tool install Sitecore.Cli
 
-  #     - name: Install Sitecore CLI
-  #       run: dotnet tool install Sitecore.Cli
+      - name: Initialize Sitecore CLI Plugins
+        if: steps.check.outputs.changed == 'true'
+        run: dotnet sitecore plugin init
 
-  #     - name: Initialize Sitecore CLI Plugins
-  #       run: dotnet sitecore plugin init
+      - name: Validate Serialization
+        if: steps.check.outputs.changed == 'true'
+        run: dotnet sitecore ser validate
 
-  #     - name: Validate Serialization
-  #       run: dotnet sitecore ser validate
+      # - name: Create Itempackage
+      #   if: steps.check.outputs.changed == 'true'
 
-  #     - name: Create Itempackage
-  #       run: dotnet sitecore ser pkg create -o foundation.itempackage
+      #   run: dotnet sitecore ser pkg create -o foundation.itempackage
 
-  #     - name: Upload Itempackage Artifact
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: foundation.itempackage
-  #         path: foundation.itempackage
-  #         retention-days: 90
+      # - name: Upload Itempackage Artifact
+      #   if: steps.check.outputs.changed == 'true'
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: foundation.itempackage
+      #     path: foundation.itempackage
+      #     retention-days: 90
 
   # deployQA:
-  #   needs: createPackage
+  #   needs: buildPackage
   #   uses: ./.github/workflows/sitecore-deploy.yml
   #   with:
   #     environment: qa_ncus
   #   secrets: inherit
 
   # deployProd:
-  #   needs: createPackage
+  #   needs: buildPackage
   #   uses: ./.github/workflows/sitecore-deploy.yml
   #   with:
   #     environment: prod_ncus
