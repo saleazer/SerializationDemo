@@ -17,10 +17,10 @@ jobs:
         with:
           fetch-depth: 1
 
-      # - name: Download Itempackage Artifact
-      #   uses: actions/download-artifact@v4
-      #   with:
-      #     name: foundation.itempackage
+      - name: Download Itempackage Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: foundation.itempackage
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
