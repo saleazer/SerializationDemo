@@ -111,10 +111,10 @@ jobs:
     with:
       environment: QA
     secrets:
-      XMC_CLIENT_ID: ${{ secrets.QA_XMC_CLIENT_ID }}
-      XMC_CLIENT_SECRET: ${{ secrets.QA_XMC_CLIENT_SECRET }}
-      XMC_AUTH_HOST: ${{ secrets.QA_XMC_AUTH_HOST }}
-      XMC_CM_HOST: ${{ secrets.QA_XMC_CM_HOST }}
+      XMC_CLIENT_ID: ${{ secrets.XMC_CLIENT_ID }}
+      XMC_CLIENT_SECRET: ${{ secrets.XMC_CLIENT_SECRET }}
+      XMC_AUTH_HOST: ${{ secrets.XMC_AUTH_HOST }}
+      XMC_CM_HOST: ${{ secrets.XMC_CM_HOST }}
 
   # deployProd:
   #   needs: buildPackage
