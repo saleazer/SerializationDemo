@@ -8,6 +8,8 @@ on:
 jobs:
   buildPackage:
     runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.check.outputs.changed }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -102,16 +104,15 @@ jobs:
           path: foundation.itempackage
           retention-days: 90
 
-  # deployQA:
-  #   needs: buildPackage
-  #   uses: ./.github/workflows/sitecore-deploy.yml
-  #   with:
-  #     environment: qa_ncus
-  #   secrets: inherit
+  deployQA:
+    needs: buildPackage
+    if: needs.buildPackage.outputs.changed == 'true'
+    uses: ./.github/workflows/sitecore-deploy.yml
+    with:
+      environment: QA
 
   # deployProd:
   #   needs: buildPackage
   #   uses: ./.github/workflows/sitecore-deploy.yml
   #   with:
-  #     environment: prod_ncus
-  #   secrets: inherit
+  #     environment: Prod

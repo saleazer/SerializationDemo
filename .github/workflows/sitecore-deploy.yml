@@ -13,7 +13,7 @@ jobs:
     environment: ${{ inputs.environment }}
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
@@ -22,35 +22,35 @@ jobs:
         with:
           name: foundation.itempackage
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.x'
+      # - name: Setup .NET
+      #   uses: actions/setup-dotnet@v4
+      #   with:
+      #     dotnet-version: '8.x'
 
-      - name: Install Sitecore CLI
-        run: dotnet tool install Sitecore.Cli
+      # - name: Install Sitecore CLI
+      #   run: dotnet tool install Sitecore.Cli
 
-      - name: Initialize Sitecore CLI Plugins
-        run: dotnet sitecore plugin init
+      # - name: Initialize Sitecore CLI Plugins
+      #   run: dotnet sitecore plugin init
 
-      - name: Authenticate with Sitecore Cloud
-        env:
-          CLIENT_ID: ${{ secrets.XMC_CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.XMC_CLIENT_SECRET }}
-          AUTH_HOST: ${{ secrets.XMC_AUTH_HOST }}
-          CM_HOST: ${{ secrets.XMC_CM_HOST }}
-        run: |
-          dotnet sitecore login \
-            --authority "${AUTH_HOST}" \
-            --audience "https://api.sitecorecloud.io" \
-            --client-id "${CLIENT_ID}" \
-            --client-secret "${CLIENT_SECRET}" \
-            --cm "${CM_HOST}" \
-            --client-credentials true \
-            --allow-write true
+      # - name: Authenticate with Sitecore Cloud
+      #   env:
+      #     CLIENT_ID: ${{ secrets.XMC_CLIENT_ID }}
+      #     CLIENT_SECRET: ${{ secrets.XMC_CLIENT_SECRET }}
+      #     AUTH_HOST: ${{ vars.XMC_AUTH_HOST }}
+      #     CM_HOST: ${{ vars.XMC_CM_HOST }}
+      #   run: |
+      #     dotnet sitecore login \
+      #       --authority "${AUTH_HOST}" \
+      #       --audience "https://api.sitecorecloud.io" \
+      #       --client-id "${CLIENT_ID}" \
+      #       --client-secret "${CLIENT_SECRET}" \
+      #       --cm "${CM_HOST}" \
+      #       --client-credentials true \
+      #       --allow-write true
 
-      - name: Deploy Itempackage to ${{ inputs.environment }}
-        run: |
-          echo "Deploying itempackage to ${{ inputs.environment }}"
-          dotnet sitecore ser pkg install \
-            -f foundation.itempackage
+      # - name: Deploy Itempackage to ${{ inputs.environment }}
+      #   run: |
+      #     echo "Deploying itempackage to ${{ inputs.environment }}"
+      #     dotnet sitecore ser pkg install \
+      #       -f foundation.itempackage
