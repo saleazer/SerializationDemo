@@ -6,6 +6,15 @@ on:
       environment:
         required: true
         type: string
+    secrets:
+      XMC_CLIENT_ID:
+        required: true
+      XMC_CLIENT_SECRET:
+        required: true
+      XMC_AUTH_HOST:
+        required: true
+      XMC_CM_HOST:
+        required: true
 
 jobs:
   deploy:
@@ -37,8 +46,8 @@ jobs:
         env:
           CLIENT_ID: ${{ secrets.XMC_CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.XMC_CLIENT_SECRET }}
-          AUTH_HOST: ${{ vars.XMC_AUTH_HOST }}
-          CM_HOST: ${{ vars.XMC_CM_HOST }}
+          AUTH_HOST: ${{ secrets.XMC_AUTH_HOST }}
+          CM_HOST: ${{ secrets.XMC_CM_HOST }}
         run: |
           dotnet sitecore login \
             --authority "${AUTH_HOST}" \
