@@ -1,46 +1,46 @@
 ﻿# Do not commit this file to source control or modify it. It is safe to delete; it will recreate itself.
 ---
 File: |
-  C:\git\CustomerPortalWeb\src\Serialization\Foundation\items\Templates\OfferCatalog Template.yml
+  C:\git\testing\SerializationDemo\src\Serialization\Foundation\items\Templates\OfferCatalog Template.yml
 ID: "f84c1e4b-4282-4b3d-8c24-f45f73e8ded8"
 Parent: "b62667b8-c5a6-4344-bb98-12d7cf9c9d98"
 Template: "ab86861a-6030-46c5-b394-e8f99e8b87db"
 Path: /sitecore/templates/User Defined/Loves/Repository/OfferCatalog Template
 Signature: a7QwHB6u0OQ6dEUwoO/mU1738QmNFsY13SKopcxmgAI=
-Modified: 639051363256867824
+Modified: 639087717409273328
 ---
 File: |
-  C:\git\CustomerPortalWeb\src\Serialization\Foundation\items\Templates\OfferCatalog Template\LocalBusiness Schema.yml
+  C:\git\testing\SerializationDemo\src\Serialization\Foundation\items\Templates\OfferCatalog Template\LocalBusiness Schema.yml
 ID: "20d16aa8-1c7c-40cf-970f-9cb73315d41c"
 Parent: "f84c1e4b-4282-4b3d-8c24-f45f73e8ded8"
 Template: "e269fbb5-3750-427a-9149-7aa950b49301"
 Path: /sitecore/templates/User Defined/Loves/Repository/OfferCatalog Template/LocalBusiness Schema
 Signature: 7VFBiwupijaU9FqQXzUSxkH17NuTPGGMOXo/HFbeOmU=
-Modified: 639051363256887854
+Modified: 639087717409284774
 ---
 File: |
-  C:\git\CustomerPortalWeb\src\Serialization\Foundation\items\Templates\OfferCatalog Template\LocalBusiness Schema\Amenity.yml
+  C:\git\testing\SerializationDemo\src\Serialization\Foundation\items\Templates\OfferCatalog Template\LocalBusiness Schema\Amenity.yml
 ID: "c62f07a5-aa1d-41ff-a296-8a462c0856af"
 Parent: "20d16aa8-1c7c-40cf-970f-9cb73315d41c"
 Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
 Path: /sitecore/templates/User Defined/Loves/Repository/OfferCatalog Template/LocalBusiness Schema/Amenity
 Signature: XUGdq33+AjSTKOce91w4Jvzaroz3Lk/Xt3SpzRTzxDg=
-Modified: 639051363256887854
+Modified: 639087717409284774
 ---
 File: |
-  C:\git\CustomerPortalWeb\src\Serialization\Foundation\items\Templates\OfferCatalog Template\LocalBusiness Schema\Description.yml
+  C:\git\testing\SerializationDemo\src\Serialization\Foundation\items\Templates\OfferCatalog Template\LocalBusiness Schema\Description.yml
 ID: "f2c4d427-15dd-4702-bf5f-bb58892e44be"
 Parent: "20d16aa8-1c7c-40cf-970f-9cb73315d41c"
 Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
 Path: /sitecore/templates/User Defined/Loves/Repository/OfferCatalog Template/LocalBusiness Schema/Description
 Signature: gz2ZUVF0OzGniFKI2VpQQSccoXW3tX+i6M2P0ckzAdo=
-Modified: 639051363256887854
+Modified: 639087717409284774
 ---
 File: |
-  C:\git\CustomerPortalWeb\src\Serialization\Foundation\items\Templates\OfferCatalog Template\LocalBusiness Schema\Title.yml
+  C:\git\testing\SerializationDemo\src\Serialization\Foundation\items\Templates\OfferCatalog Template\LocalBusiness Schema\Title.yml
 ID: "96077c6b-641c-4915-a55e-b5a0d52c2032"
 Parent: "20d16aa8-1c7c-40cf-970f-9cb73315d41c"
 Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
 Path: /sitecore/templates/User Defined/Loves/Repository/OfferCatalog Template/LocalBusiness Schema/Title
 Signature: 2a3sReFX2FoeFXNdzSc+MGkDfVS6VzXZKGmp0gPaVCI=
-Modified: 639051363256887854
+Modified: 639087717409294833

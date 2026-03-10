@@ -1,82 +1,82 @@
 ﻿# Do not commit this file to source control or modify it. It is safe to delete; it will recreate itself.
 ---
 File: |
-  C:\git\CustomerPortalWeb\src\Serialization\Foundation\items\Repository\OfferCatalog\Amazon Lockers.yml
+  C:\git\testing\SerializationDemo\src\Serialization\Foundation\items\Repository\OfferCatalog\Amazon Lockers.yml
 ID: "fdf0f9a2-db39-415e-9533-729ac53f3b01"
 Parent: "f067ca55-9381-4099-8d0b-e3c02e391138"
 Template: "f84c1e4b-4282-4b3d-8c24-f45f73e8ded8"
 Path: /sitecore/content/Repository/Collections/OfferCatalog/Amazon Lockers
 Signature: 7x1fPkPPxWKei+nPtGURPB7uhVJ237W0P9Vpu6Qtgy8=
-Modified: 639051363256833570
+Modified: 639087717409222902
 ---
 File: |
-  C:\git\CustomerPortalWeb\src\Serialization\Foundation\items\Repository\OfferCatalog\Emergency Roadside Assistance.yml
-ID: "8018716b-a68f-49fb-84d0-af7caf17a250"
-Parent: "f067ca55-9381-4099-8d0b-e3c02e391138"
-Template: "f84c1e4b-4282-4b3d-8c24-f45f73e8ded8"
-Path: /sitecore/content/Repository/Collections/OfferCatalog/Emergency Roadside Assistance
-Signature: QHdm1UCAO+xAkD1pIVbYY/zK1rLKiyBu2O+s20RpnF8=
-Modified: 639051363256853121
----
-File: |
-  C:\git\CustomerPortalWeb\src\Serialization\Foundation\items\Repository\OfferCatalog\Laundry Facility.yml
-ID: "2a546bd6-78db-4efc-8006-a80b06f9257a"
-Parent: "f067ca55-9381-4099-8d0b-e3c02e391138"
-Template: "f84c1e4b-4282-4b3d-8c24-f45f73e8ded8"
-Path: /sitecore/content/Repository/Collections/OfferCatalog/Laundry Facility
-Signature: RTo+itNPxwboWBHEonwJdXbyW9+pWa/shpeuL2hbH0w=
-Modified: 639051363256867824
----
-File: |
-  C:\git\CustomerPortalWeb\src\Serialization\Foundation\items\Repository\OfferCatalog\Battery Replacement.yml
+  C:\git\testing\SerializationDemo\src\Serialization\Foundation\items\Repository\OfferCatalog\Battery Replacement.yml
 ID: "4541c2a3-6010-4ac8-8ecb-6919218e9bf2"
 Parent: "f067ca55-9381-4099-8d0b-e3c02e391138"
 Template: "f84c1e4b-4282-4b3d-8c24-f45f73e8ded8"
 Path: /sitecore/content/Repository/Collections/OfferCatalog/Battery Replacement
 Signature: p2WzKB4U3bDJcsII/NnO6Wg7I9m2FyIoj6LOQGlzPF8=
-Modified: 639051363256853121
+Modified: 639087717409240251
 ---
 File: |
-  C:\git\CustomerPortalWeb\src\Serialization\Foundation\items\Repository\OfferCatalog\Mechanical Services.yml
-ID: "c553c529-cec7-403d-84aa-438d938a884e"
-Parent: "f067ca55-9381-4099-8d0b-e3c02e391138"
-Template: "f84c1e4b-4282-4b3d-8c24-f45f73e8ded8"
-Path: /sitecore/content/Repository/Collections/OfferCatalog/Mechanical Services
-Signature: +wF7+ikn+Lc6ntTRUlQ0sq7xp+La9lrJOCqdg4rGOFg=
-Modified: 639051363256867824
----
-File: |
-  C:\git\CustomerPortalWeb\src\Serialization\Foundation\items\Repository\OfferCatalog\Retread Tires.yml
-ID: "ed74b210-ba21-4d62-8370-09df146e7bcd"
-Parent: "f067ca55-9381-4099-8d0b-e3c02e391138"
-Template: "f84c1e4b-4282-4b3d-8c24-f45f73e8ded8"
-Path: /sitecore/content/Repository/Collections/OfferCatalog/Retread Tires
-Signature: EF8MZl6OkTu4Q92O0qn+9Qqji6WA7+lHcen7WFc/Hdo=
-Modified: 639051363256867824
----
-File: |
-  C:\git\CustomerPortalWeb\src\Serialization\Foundation\items\Repository\OfferCatalog\RV Hookups.yml
-ID: "cfb98f40-fff2-46a4-aace-52c58925b2fb"
-Parent: "f067ca55-9381-4099-8d0b-e3c02e391138"
-Template: "f84c1e4b-4282-4b3d-8c24-f45f73e8ded8"
-Path: /sitecore/content/Repository/Collections/OfferCatalog/RV Hookups
-Signature: 8K+mOgjKzSyh6DkUjNAQLDpj0kkbqcgIPT+sOgwc3ZY=
-Modified: 639051363256867824
----
-File: |
-  C:\git\CustomerPortalWeb\src\Serialization\Foundation\items\Repository\OfferCatalog\Tire Services.yml
-ID: "b3531eff-e37d-4332-8ee9-af3084a1c3d9"
-Parent: "f067ca55-9381-4099-8d0b-e3c02e391138"
-Template: "f84c1e4b-4282-4b3d-8c24-f45f73e8ded8"
-Path: /sitecore/content/Repository/Collections/OfferCatalog/Tire Services
-Signature: OtezFWw+ll32vtIiR7+CZsL/CCpPiQsQzQUgFpvzo1g=
-Modified: 639051363256867824
----
-File: |
-  C:\git\CustomerPortalWeb\src\Serialization\Foundation\items\Repository\OfferCatalog.yml
+  C:\git\testing\SerializationDemo\src\Serialization\Foundation\items\Repository\OfferCatalog.yml
 ID: "f067ca55-9381-4099-8d0b-e3c02e391138"
 Parent: "c4e071d8-abfc-46c5-9f13-4c91e48fb2f4"
 Template: "a87a00b1-e6db-45ab-8b54-636fec3b5523"
 Path: /sitecore/content/Repository/Collections/OfferCatalog
 Signature: T1eqJEygIG5b4KQ29EMyMP/ojGHi+DnEV7RAPIGeYuA=
-Modified: 639051363256833570
+Modified: 639087717409205515
+---
+File: |
+  C:\git\testing\SerializationDemo\src\Serialization\Foundation\items\Repository\OfferCatalog\Laundry Facility.yml
+ID: "2a546bd6-78db-4efc-8006-a80b06f9257a"
+Parent: "f067ca55-9381-4099-8d0b-e3c02e391138"
+Template: "f84c1e4b-4282-4b3d-8c24-f45f73e8ded8"
+Path: /sitecore/content/Repository/Collections/OfferCatalog/Laundry Facility
+Signature: RTo+itNPxwboWBHEonwJdXbyW9+pWa/shpeuL2hbH0w=
+Modified: 639087717409248398
+---
+File: |
+  C:\git\testing\SerializationDemo\src\Serialization\Foundation\items\Repository\OfferCatalog\Emergency Roadside Assistance.yml
+ID: "8018716b-a68f-49fb-84d0-af7caf17a250"
+Parent: "f067ca55-9381-4099-8d0b-e3c02e391138"
+Template: "f84c1e4b-4282-4b3d-8c24-f45f73e8ded8"
+Path: /sitecore/content/Repository/Collections/OfferCatalog/Emergency Roadside Assistance
+Signature: QHdm1UCAO+xAkD1pIVbYY/zK1rLKiyBu2O+s20RpnF8=
+Modified: 639087717409248398
+---
+File: |
+  C:\git\testing\SerializationDemo\src\Serialization\Foundation\items\Repository\OfferCatalog\Retread Tires.yml
+ID: "ed74b210-ba21-4d62-8370-09df146e7bcd"
+Parent: "f067ca55-9381-4099-8d0b-e3c02e391138"
+Template: "f84c1e4b-4282-4b3d-8c24-f45f73e8ded8"
+Path: /sitecore/content/Repository/Collections/OfferCatalog/Retread Tires
+Signature: EF8MZl6OkTu4Q92O0qn+9Qqji6WA7+lHcen7WFc/Hdo=
+Modified: 639087717409259012
+---
+File: |
+  C:\git\testing\SerializationDemo\src\Serialization\Foundation\items\Repository\OfferCatalog\Mechanical Services.yml
+ID: "c553c529-cec7-403d-84aa-438d938a884e"
+Parent: "f067ca55-9381-4099-8d0b-e3c02e391138"
+Template: "f84c1e4b-4282-4b3d-8c24-f45f73e8ded8"
+Path: /sitecore/content/Repository/Collections/OfferCatalog/Mechanical Services
+Signature: +wF7+ikn+Lc6ntTRUlQ0sq7xp+La9lrJOCqdg4rGOFg=
+Modified: 639087717409248398
+---
+File: |
+  C:\git\testing\SerializationDemo\src\Serialization\Foundation\items\Repository\OfferCatalog\RV Hookups.yml
+ID: "cfb98f40-fff2-46a4-aace-52c58925b2fb"
+Parent: "f067ca55-9381-4099-8d0b-e3c02e391138"
+Template: "f84c1e4b-4282-4b3d-8c24-f45f73e8ded8"
+Path: /sitecore/content/Repository/Collections/OfferCatalog/RV Hookups
+Signature: 8K+mOgjKzSyh6DkUjNAQLDpj0kkbqcgIPT+sOgwc3ZY=
+Modified: 639087717409259012
+---
+File: |
+  C:\git\testing\SerializationDemo\src\Serialization\Foundation\items\Repository\OfferCatalog\Tire Services.yml
+ID: "b3531eff-e37d-4332-8ee9-af3084a1c3d9"
+Parent: "f067ca55-9381-4099-8d0b-e3c02e391138"
+Template: "f84c1e4b-4282-4b3d-8c24-f45f73e8ded8"
+Path: /sitecore/content/Repository/Collections/OfferCatalog/Tire Services
+Signature: OtezFWw+ll32vtIiR7+CZsL/CCpPiQsQzQUgFpvzo1g=
+Modified: 639087717409259012
