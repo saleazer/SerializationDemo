@@ -55,6 +55,15 @@ jobs:
 
           echo "Comparing src/Serialization: $PREV_REF → origin/$CURRENT_BRANCH"
 
+          # Log the changed files for visibility.
+          CHANGED_FILES=$(git diff --name-only "$PREV_REF" "origin/$CURRENT_BRANCH" -- src/Serialization)
+          if [ -n "$CHANGED_FILES" ]; then
+            echo "Changed serialization files:"
+            echo "$CHANGED_FILES"
+          else
+            echo "No changed serialization files found."
+          fi
+
           # Compare src/Serialization between the two release branch tips.
           if ! git diff --quiet "$PREV_REF" "origin/$CURRENT_BRANCH" -- src/Serialization; then
             echo "Serialization changes detected."
