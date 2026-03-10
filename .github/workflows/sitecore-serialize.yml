@@ -18,28 +18,28 @@ jobs:
 
       - name: Check for serialization changes since last release
         id: check
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Determine current release branch from GITHUB_REF.
           CURRENT_BRANCH="${GITHUB_REF#refs/heads/}"
           echo "Current branch: $CURRENT_BRANCH"
 
-          # If GITHUB_TOKEN is available, configure auth on the remote so
-          # fetch works for private repos. Needed for ACT-CLI where
-          # actions/checkout doesn't always set this up.
-          if [ -n "${GITHUB_TOKEN:-}" ]; then
-            REPO_URL=$(git remote get-url origin 2>/dev/null || echo "")
-            REPO_SLUG=$(echo "$REPO_URL" | sed -E 's|.*github\.com[:/]||; s|\.git$||')
-            if [ -n "$REPO_SLUG" ]; then
-              git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO_SLUG}.git"
-              echo "Token auth configured for $REPO_SLUG"
-            else
-              echo "::warning::Could not extract repo slug — skipping token auth setup."
-            fi
-          else
-            echo "No GITHUB_TOKEN — skipping token auth setup."
-          fi
+          # # If GITHUB_TOKEN is available, configure auth on the remote so
+          # # fetch works for private repos. Needed for ACT-CLI where
+          # # actions/checkout doesn't always set this up.
+          # if [ -n "${GITHUB_TOKEN:-}" ]; then
+          #   REPO_URL=$(git remote get-url origin 2>/dev/null || echo "")
+          #   REPO_SLUG=$(echo "$REPO_URL" | sed -E 's|.*github\.com[:/]||; s|\.git$||')
+          #   if [ -n "$REPO_SLUG" ]; then
+          #     git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO_SLUG}.git"
+          #     echo "Token auth configured for $REPO_SLUG"
+          #   else
+          #     echo "::warning::Could not extract repo slug — skipping token auth setup."
+          #   fi
+          # else
+          #   echo "No GITHUB_TOKEN — skipping token auth setup."
+          # fi
 
           # Shallow-fetch all releases/* branch tips so we can list and diff them.
           git fetch --depth 1 --prune origin '+refs/heads/releases/*:refs/remotes/origin/releases/*' || true
