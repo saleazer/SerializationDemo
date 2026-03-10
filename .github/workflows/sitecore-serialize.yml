@@ -89,18 +89,18 @@ jobs:
         if: steps.check.outputs.changed == 'true'
         run: dotnet sitecore ser validate
 
-      # - name: Create Itempackage
-      #   if: steps.check.outputs.changed == 'true'
+      - name: Create Itempackage
+        if: steps.check.outputs.changed == 'true'
 
-      #   run: dotnet sitecore ser pkg create -o foundation.itempackage
+        run: dotnet sitecore ser pkg create -o foundation.itempackage
 
-      # - name: Upload Itempackage Artifact
-      #   if: steps.check.outputs.changed == 'true'
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: foundation.itempackage
-      #     path: foundation.itempackage
-      #     retention-days: 90
+      - name: Upload Itempackage Artifact
+        if: steps.check.outputs.changed == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: foundation.itempackage
+          path: foundation.itempackage
+          retention-days: 90
 
   # deployQA:
   #   needs: buildPackage
