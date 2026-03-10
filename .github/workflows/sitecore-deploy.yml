@@ -58,8 +58,8 @@ jobs:
             --client-credentials true \
             --allow-write true
 
-      # - name: Deploy Itempackage to ${{ inputs.environment }}
-      #   run: |
-      #     echo "Deploying itempackage to ${{ inputs.environment }}"
-      #     dotnet sitecore ser pkg install \
-      #       -f foundation.itempackage
+      - name: Deploy Itempackage to ${{ inputs.environment }}
+        run: |
+          echo "Deploying itempackage to ${{ inputs.environment }}"
+          dotnet sitecore ser pkg install \
+            -f foundation.itempackage
