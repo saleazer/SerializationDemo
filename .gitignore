@@ -1,0 +1,13 @@
+# Sitecore CLI
+.sitecore/user.json
+.sitecore/.cache/
+.sitecore/package-cache/
+
+# IDE
+.vs/
+.vscode/
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store

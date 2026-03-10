@@ -1,0 +1,21 @@
+{
+  "$schema": "../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "Foundation",
+  "references": [],
+  "items": {
+    "includes": [
+      {
+        "name": "Repository",
+        "path": "/sitecore/content/Repository/Collections/OfferCatalog",
+        "allowedPushOperations": "CreateAndUpdate",
+        "scope": "ItemAndDescendants"
+      },
+      {
+        "name": "Templates",
+        "path": "/sitecore/templates/User Defined/Loves/Repository/OfferCatalog Template",
+        "allowedPushOperations": "CreateAndUpdate",
+        "scope": "ItemAndDescendants"
+      }
+    ]
+  }
+}

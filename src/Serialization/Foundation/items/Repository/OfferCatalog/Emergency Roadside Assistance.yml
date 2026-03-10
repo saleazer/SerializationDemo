@@ -1,0 +1,40 @@
+﻿---
+ID: "8018716b-a68f-49fb-84d0-af7caf17a250"
+Parent: "f067ca55-9381-4099-8d0b-e3c02e391138"
+Template: "f84c1e4b-4282-4b3d-8c24-f45f73e8ded8"
+Path: /sitecore/content/Repository/Collections/OfferCatalog/Emergency Roadside Assistance
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251211T224642Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\stephanie.leazer@loves.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\stephanie.leazer@loves.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "2c5ed14f-35ba-4b74-bb26-adc8ac31ee47"
+    - ID: "96077c6b-641c-4915-a55e-b5a0d52c2032"
+      Hint: Title
+      Value: Emergency Roadside Assistance
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\stephanie.leazer@loves.com
+    - ID: "c62f07a5-aa1d-41ff-a296-8a462c0856af"
+      Hint: Amenity
+      Value: "{98798DFD-9473-4274-A402-4942B221C24C}"
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20251216T165234Z
+    - ID: "f2c4d427-15dd-4702-bf5f-bb58892e44be"
+      Hint: Description
+      Value: Need to get from POs..
