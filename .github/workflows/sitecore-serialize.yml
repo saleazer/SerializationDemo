@@ -33,7 +33,12 @@ jobs:
             REPO_SLUG=$(echo "$REPO_URL" | sed -E 's|.*github\.com[:/]||; s|\.git$||')
             if [ -n "$REPO_SLUG" ]; then
               git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO_SLUG}.git"
+              echo "Token auth configured for $REPO_SLUG"
+            else
+              echo "::warning::Could not extract repo slug — skipping token auth setup."
             fi
+          else
+            echo "No GITHUB_TOKEN — skipping token auth setup."
           fi
 
           # Shallow-fetch all releases/* branch tips so we can list and diff them.
@@ -64,7 +69,8 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          echo "Previous release: $PREV_REF"
+
+          echo "Comparing src/Serialization: $PREV_REF → origin/$CURRENT_BRANCH"
 
           # Compare src/Serialization between the two release branch tips.
           if ! git diff --quiet "$PREV_REF" "origin/$CURRENT_BRANCH" -- src/Serialization; then
