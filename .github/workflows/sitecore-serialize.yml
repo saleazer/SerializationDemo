@@ -1,112 +1,125 @@
 name: Sitecore Serialization
 
+# Uses tag-based change detection: diffs HEAD against sitecore-qa / sitecore-prod
+# tags to determine if src/Serialization has changed since the last deployment.
+#
+# Flow:
+#   1. detect-changes: diffs HEAD against sitecore-qa / sitecore-prod tags
+#   2. buildPackage: builds the itempackage (if changes detected)
+#   3. deployQA: deploys to QA (if QA changes detected)
+#   4. update-qa-tag: advances sitecore-qa tag after successful QA deploy
+#   5. deployProd: deploys to Prod (if Prod changes detected)
+#   6. update-prod-tag: advances sitecore-prod tag after successful Prod deploy
+#
+# If a tag doesn't exist yet, it's treated as a first deployment (always deploys).
+
 on:
   push:
     branches: [ "releases/*" ]
   workflow_dispatch:
+    inputs:
+      force-deploy:
+        description: 'Skip change detection and force deployment to all environments'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
 
 jobs:
-  buildPackage:
+  # ──────────────────────────────────────────────
+  #  Detect serialization changes since last deployment
+  # ──────────────────────────────────────────────
+  detect-changes:
     runs-on: ubuntu-latest
     outputs:
-      changed: ${{ steps.check.outputs.changed }}
+      qa-changed: ${{ steps.diff.outputs.qa-changed }}
+      prod-changed: ${{ steps.diff.outputs.prod-changed }}
+    steps:
+      - name: Checkout (full history for tag comparison)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect serialization changes since last deployment
+        id: diff
+        run: |
+          FORCE="${{ inputs.force-deploy }}"
+
+          if [ "$FORCE" = "true" ]; then
+            echo "Force deploy requested — skipping change detection"
+            echo "qa-changed=true" >> $GITHUB_OUTPUT
+            echo "prod-changed=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          check_changes() {
+            local tag="$1"
+            local output_key="$2"
+
+            if git rev-parse "$tag" >/dev/null 2>&1; then
+              CHANGES=$(git diff --name-only "$tag" HEAD -- src/Serialization)
+              if [ -n "$CHANGES" ]; then
+                echo "$output_key=true" >> $GITHUB_OUTPUT
+                echo "::group::Changes detected since $tag"
+                echo "$CHANGES"
+                echo "::endgroup::"
+              else
+                echo "$output_key=false" >> $GITHUB_OUTPUT
+                echo "No serialization changes since $tag"
+              fi
+            else
+              echo "$output_key=true" >> $GITHUB_OUTPUT
+              echo "Tag $tag not found — treating as first deployment"
+            fi
+          }
+
+          check_changes "sitecore-qa" "qa-changed"
+          check_changes "sitecore-prod" "prod-changed"
+
+  # ──────────────────────────────────────────────
+  #  Build itempackage (only if any environment needs deployment)
+  # ──────────────────────────────────────────────
+  buildPackage:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.qa-changed == 'true' || needs.detect-changes.outputs.prod-changed == 'true'
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
-      - name: Check for serialization changes since last release
-        id: check
-        run: |
-          # Determine current release branch from GITHUB_REF.
-          CURRENT_BRANCH="${GITHUB_REF#refs/heads/}"
-          echo "Current branch: $CURRENT_BRANCH"
-
-          # Shallow-fetch all releases/* branch tips so we can list and diff them.
-          git fetch --depth 1 --prune origin '+refs/heads/releases/*:refs/remotes/origin/releases/*' || true
-          echo "Release branches found: $(git for-each-ref --sort=refname --format='%(refname:short)' refs/remotes/origin/releases/ | tr '\n' ' ')"
-
-          # Helper: extract the YYYYMMDD date from a releases/ branch name.
-          extract_date() {
-            echo "$1" | sed -n 's|.*releases/\([0-9]\{8\}\).*|\1|p'
-          }
-
-          # Extract date from current branch
-          CURRENT_DATE=$(extract_date "$CURRENT_BRANCH")
-          if [ -z "$CURRENT_DATE" ]; then
-            echo "::error::Could not parse date from branch '$CURRENT_BRANCH'"
-            exit 1
-          fi
-
-          # Find the most recent releases/* branch whose date is before ours.
-          PREV_REF=""
-          for REF in $(git for-each-ref --sort=refname --format='%(refname:short)' refs/remotes/origin/releases/); do
-            DATE=$(extract_date "$REF")
-            [ -z "$DATE" ] && continue
-            [ "$DATE" -lt "$CURRENT_DATE" ] 2>/dev/null && PREV_REF="$REF"
-          done
-
-          if [ -z "$PREV_REF" ]; then
-            echo "No previous release branch found — first release."
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          echo "Comparing src/Serialization: $PREV_REF → origin/$CURRENT_BRANCH"
-
-          # Log the changed files for visibility.
-          CHANGED_FILES=$(git diff --name-only "$PREV_REF" "origin/$CURRENT_BRANCH" -- src/Serialization)
-          if [ -n "$CHANGED_FILES" ]; then
-            echo "Changed serialization files:"
-            echo "$CHANGED_FILES"
-          else
-            echo "No changed serialization files found."
-          fi
-
-          # Compare src/Serialization between the two release branch tips.
-          if ! git diff --quiet "$PREV_REF" "origin/$CURRENT_BRANCH" -- src/Serialization; then
-            echo "Serialization changes detected."
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "No serialization changes."
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Setup .NET
-        if: steps.check.outputs.changed == 'true'
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
 
       - name: Install Sitecore CLI
-        if: steps.check.outputs.changed == 'true'
         run: dotnet tool install Sitecore.Cli
 
       - name: Initialize Sitecore CLI Plugins
-        if: steps.check.outputs.changed == 'true'
         run: dotnet sitecore plugin init
 
       - name: Validate Serialization
-        if: steps.check.outputs.changed == 'true'
         run: dotnet sitecore ser validate
 
       - name: Create Itempackage
-        if: steps.check.outputs.changed == 'true'
-
         run: dotnet sitecore ser pkg create -o foundation.itempackage
 
       - name: Upload Itempackage Artifact
-        if: steps.check.outputs.changed == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: foundation.itempackage
           path: foundation.itempackage
           retention-days: 90
 
+  # ──────────────────────────────────────────────
+  #  QA Deploy
+  # ──────────────────────────────────────────────
   deployQA:
-    needs: buildPackage
-    if: needs.buildPackage.outputs.changed == 'true'
+    needs: [detect-changes, buildPackage]
+    if: needs.detect-changes.outputs.qa-changed == 'true'
     uses: ./.github/workflows/sitecore-deploy.yml
     with:
       environment: QA
@@ -116,8 +129,55 @@ jobs:
       XMC_AUTH_HOST: ${{ secrets.XMC_AUTH_HOST }}
       XMC_CM_HOST: ${{ secrets.XMC_CM_HOST }}
 
+  update-qa-tag:
+    needs: deployQA
+    if: ${{ !cancelled() && needs.deployQA.result == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Advance sitecore-qa tag to current commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -af sitecore-qa -m "Deployed by ${{ github.actor }} from ${{ github.ref_name }} (${{ github.sha }})"
+          git push -f origin sitecore-qa
+          echo "Updated sitecore-qa tag to $(git rev-parse HEAD)"
+
+  # ──────────────────────────────────────────────
+  #  Prod Deploy
+  # ──────────────────────────────────────────────
   # deployProd:
-  #   needs: buildPackage
+  #   needs: [detect-changes, buildPackage]
+  #   if: needs.detect-changes.outputs.prod-changed == 'true'
   #   uses: ./.github/workflows/sitecore-deploy.yml
   #   with:
   #     environment: Prod
+  #   secrets:
+  #     XMC_CLIENT_ID: ${{ secrets.XMC_CLIENT_ID }}
+  #     XMC_CLIENT_SECRET: ${{ secrets.XMC_CLIENT_SECRET }}
+  #     XMC_AUTH_HOST: ${{ secrets.XMC_AUTH_HOST }}
+  #     XMC_CM_HOST: ${{ secrets.XMC_CM_HOST }}
+
+  # update-prod-tag:
+  #   needs: deployProd
+  #   if: ${{ !cancelled() && needs.deployProd.result == 'success' }}
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: write
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 1
+  #     - name: Advance sitecore-prod tag to current commit
+  #       run: |
+  #         git config user.name "github-actions[bot]"
+  #         git config user.email "github-actions[bot]@users.noreply.github.com"
+  #         git tag -af sitecore-prod -m "Deployed by ${{ github.actor }} from ${{ github.ref_name }} (${{ github.sha }})"
+  #         git push -f origin sitecore-prod
+  #         echo "Updated sitecore-prod tag to $(git rev-parse HEAD)"
