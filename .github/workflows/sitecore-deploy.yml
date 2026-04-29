@@ -63,3 +63,10 @@ jobs:
           echo "Deploying itempackage to ${{ inputs.environment }}"
           dotnet sitecore ser pkg install \
             -f foundation.itempackage
+
+      - name: Publish Template Changes
+        run: |
+          echo "Publishing changes to ${{ inputs.environment }}"
+          dotnet sitecore publish item \
+            -p "/sitecore/content/Repository/Collections/OfferCatalog" \
+            -sub
