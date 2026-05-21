@@ -1,18 +1,21 @@
 ﻿---
-ID: "96077c6b-641c-4915-a55e-b5a0d52c2032"
-Parent: "20d16aa8-1c7c-40cf-970f-9cb73315d41c"
+ID: "a4a7856e-2646-4924-99c8-7c08c70b8d0a"
+Parent: "ae76a034-9491-4b83-99f5-39f227d6fb59"
 Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
-Path: /sitecore/templates/User Defined/Loves/Repository/OfferCatalog Template/LocalBusiness Schema/Title
+Path: /sitecore/templates/Sample/Sample Item/Data/Serialization Test
 SharedFields:
+- ID: "1eb8ae32-e190-44a6-968d-ed904c794ebf"
+  Hint: Source
+  Value: Success
 - ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
   Hint: Type
   Value: "Single-Line Text"
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
-  Value: 100
+  Value: 400
 - ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
   Hint: __Shared revision
-  Value: "d623034d-351b-44fb-a466-8fdd7d013e0e"
+  Value: "887f0f5e-dc77-43ad-b06b-6203ce40dadd"
 Languages:
 - Language: en
   Versions:
@@ -20,7 +23,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20251211T223522Z
+      Value: 20260521T194622Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -31,11 +34,11 @@ Languages:
         sitecore\stephanie.leazer@loves.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "cdb11e29-ba5f-450a-bc83-877115830c91"
+      Value: "d1bccfbb-5b99-49c8-a838-f99c0ffce106"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\stephanie.leazer@loves.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20251216T165138Z
+      Value: 20260521T194723Z
