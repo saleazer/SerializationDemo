@@ -122,7 +122,7 @@ jobs:
     if: needs.detect-changes.outputs.qa-changed == 'true'
     uses: ./.github/workflows/sitecore-deploy.yml
     with:
-      environment: QA
+      environment: qa
     secrets:
       XMC_CLIENT_ID: ${{ secrets.XMC_CLIENT_ID }}
       XMC_CLIENT_SECRET: ${{ secrets.XMC_CLIENT_SECRET }}
@@ -151,33 +151,33 @@ jobs:
   # ──────────────────────────────────────────────
   #  Prod Deploy
   # ──────────────────────────────────────────────
-  # deployProd:
-  #   needs: [detect-changes, buildPackage]
-  #   if: needs.detect-changes.outputs.prod-changed == 'true'
-  #   uses: ./.github/workflows/sitecore-deploy.yml
-  #   with:
-  #     environment: Prod
-  #   secrets:
-  #     XMC_CLIENT_ID: ${{ secrets.XMC_CLIENT_ID }}
-  #     XMC_CLIENT_SECRET: ${{ secrets.XMC_CLIENT_SECRET }}
-  #     XMC_AUTH_HOST: ${{ secrets.XMC_AUTH_HOST }}
-  #     XMC_CM_HOST: ${{ secrets.XMC_CM_HOST }}
+  deployProd:
+    needs: [detect-changes, buildPackage]
+    if: needs.detect-changes.outputs.prod-changed == 'true'
+    uses: ./.github/workflows/sitecore-deploy.yml
+    with:
+      environment: prod
+    secrets:
+      XMC_CLIENT_ID: ${{ secrets.XMC_CLIENT_ID }}
+      XMC_CLIENT_SECRET: ${{ secrets.XMC_CLIENT_SECRET }}
+      XMC_AUTH_HOST: ${{ secrets.XMC_AUTH_HOST }}
+      XMC_CM_HOST: ${{ secrets.XMC_CM_HOST }}
 
-  # update-prod-tag:
-  #   needs: deployProd
-  #   if: ${{ !cancelled() && needs.deployProd.result == 'success' }}
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: write
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 1
-  #     - name: Advance sitecore-prod tag to current commit
-  #       run: |
-  #         git config user.name "github-actions[bot]"
-  #         git config user.email "github-actions[bot]@users.noreply.github.com"
-  #         git tag -af sitecore-prod -m "Deployed by ${{ github.actor }} from ${{ github.ref_name }} (${{ github.sha }})"
-  #         git push -f origin sitecore-prod
-  #         echo "Updated sitecore-prod tag to $(git rev-parse HEAD)"
+  update-prod-tag:
+    needs: deployProd
+    if: ${{ !cancelled() && needs.deployProd.result == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Advance sitecore-prod tag to current commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -af sitecore-prod -m "Deployed by ${{ github.actor }} from ${{ github.ref_name }} (${{ github.sha }})"
+          git push -f origin sitecore-prod
+          echo "Updated sitecore-prod tag to $(git rev-parse HEAD)"
