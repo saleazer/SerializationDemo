@@ -2,6 +2,7 @@
 .sitecore/user.json
 .sitecore/.cache/
 .sitecore/package-cache/
+**/.scindex
 
 # IDE
 .vs/
